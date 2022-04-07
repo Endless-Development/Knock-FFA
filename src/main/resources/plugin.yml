@@ -1,0 +1,43 @@
+name: Knockffa
+version: '${project.version}'
+main: com.techwolfx.knockffa.Knockffa
+api-version: 1.13
+authors: [ MasterWolfx ]
+description: A custom plugin for Endless-development
+softdepend:
+  - PlaceholderAPI
+depend:
+  - WorldEdit
+commands:
+  kffa:
+    description: Display all plugin commands
+    aliases: [knockffa]
+permissions:
+  kffa.*:
+    description: Gives access to every command.
+    default: op
+    children:
+      kffa.help: true
+      kffa.create: true
+      kffa.delete: true
+      kffa.join: true
+      kffa.left: true
+      kffa.setlobby: true
+      kffa.reload: true
+      kffa.list: true
+  kffa.help:
+    description: Allows to execute /kffa help
+  kffa.create:
+    description: Allows to execute /kffa create
+  kffa.delete:
+    description: Allows to execute /kffa delete
+  kffa.join:
+    description: Allows to execute /kffa join
+  kffa.left:
+    description: Allows to execute /kffa left
+  kffa.setlobby:
+    description: Allows to execute /kffa setlobby
+  kffa.reload:
+    description: Allows to execute /kffa reload
+  kffa.list:
+    description: Allows to execute /kffa list

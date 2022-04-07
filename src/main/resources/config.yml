@@ -1,0 +1,62 @@
+items:
+  0:
+    name: ""
+    material: STICK
+    amount: 1
+    enchants:
+      - KNOCKBACK#1
+  1:
+    name: "&6&lWooden Sword"
+    material: WOODEN_SWORD
+    amount: 1
+  2:
+    name: ""
+    material: SANDSTONE
+    amount: 64
+  3:
+    name: ""
+    material: ENDER_PEARL
+    amount: 1
+  4:
+    name: ""
+    material: BOW
+    amount: 1
+  5:
+    name: ""
+    material: ARROW
+    amount: 1
+  8:
+    name: ""
+    material: COBWEB
+    amount: 1
+
+armor:
+  0:
+    name: ""
+    material: IRON_BOOTS
+  1:
+    name: ""
+    material: IRON_LEGGINGS
+  2:
+    name: ""
+    material: IRON_CHESTPLATE
+  3:
+    name: ""
+    material: IRON_HELMET
+
+
+database-update-interval: 5 #minutes
+
+blocks-expire-time:
+  main: 5
+  warning: 3
+  other: 15
+
+messages:
+  arena-chat-format: "&c&lKnockFFA &8| &f{username} &8: &7{message}"
+  arena-join: "&b{username}&e joined the arena! (&b{min-players}&e/{max-players})"
+  arena-left: "&9{username}&c left the arena! (&9{min-players}&c/{max-players})"
+  killed-by-player: "&e{killed} was killed by {killer}."
+  killed-by-void: "&e{killed} fell into the void."
+
+arenas:
