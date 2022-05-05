@@ -6,12 +6,14 @@ import com.techwolfx.knockffa.arena.Arena;
 import com.techwolfx.knockffa.arena.ArenaManager;
 import com.techwolfx.knockffa.data.ArenaPlayer;
 import com.techwolfx.knockffa.data.TempBlock;
+import com.techwolfx.knockffa.database.User;
 import com.techwolfx.knockffa.enums.DeathCause;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Arrow;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -107,20 +109,35 @@ public class PlayerEvents implements Listener {
                     return;
                 }
 
+                //
                 // Receiver and attacker are inside the arena
-                if (arenaManager.isInArena(attacker)) {
-                    // If the attacker or the receiver are inside the lobby, cancel damage
-                    if (arena.isInLobby(receiver) || arena.isInLobby(attacker)) {
-                        e.setCancelled(true);
-                        return;
-                    } else if (receiver.getHealth() - e.getDamage() <= 0) {
-                        e.setDamage(0);
-                        Bukkit.getPluginManager().callEvent(new ArenaDeathEvent(arena, arena.getArenaPlayer(receiver), DeathCause.PLAYER, arena.getArenaPlayer(attacker)));
-                        return;
-                    }
+                //
 
+                // Player can't damage him self with arrow
+                if (attacker.equals(receiver)) {
+                    e.setCancelled(true);
                     return;
                 }
+
+                // If the attacker or the receiver are inside the lobby, cancel damage
+                if (arena.isInLobby(receiver) || arena.isInLobby(attacker)) {
+                    e.setCancelled(true);
+                    return;
+                }
+
+                ItemStack item = attacker.getItemInHand();
+                if (item.getType() == Material.STICK) {
+                    e.setDamage(0);
+                    return;
+                }
+
+                if (receiver.getHealth() - e.getDamage() <= 0) {
+                    e.setDamage(0);
+                    Bukkit.getPluginManager().callEvent(new ArenaDeathEvent(arena, arena.getArenaPlayer(receiver), DeathCause.PLAYER, arena.getArenaPlayer(attacker)));
+                    return;
+                }
+
+                return;
             }
             e.setCancelled(true);
         }
@@ -202,7 +219,10 @@ public class PlayerEvents implements Listener {
             if (arenaPlayer == null) {
                 return;
             }
-
+            if (plugin.getConfig().getBoolean("disable-chat-format")) {
+                return;
+            }
+            // Use chat format
             String msg = e.getMessage();
             e.setCancelled(true);
 
@@ -265,11 +285,16 @@ public class PlayerEvents implements Listener {
                             .replace("{killed}", p.getName())
                             .replace("{killer}", e.getKiller().getPlayer().getName()));
 
-            plugin.getDbCache().addKills(e.getKiller().getPlayer(), 1);
-
+            User user = plugin.getDbCache().addKills(e.getKiller().getPlayer(), 1);
+            if (plugin.getConfigManager().getStreaks().contains(user.getStreak())) {
+                arena.broadcast(plugin.getConfig().getString("messages.kill-streak")
+                        .replace("{kills}", user.getStreak()+"")
+                        .replace("{username}", e.getKiller().getPlayer().getName()));
+            }
             //plugin.getDb().addKills(e.getKiller().getPlayer(), 1);
             e.getKiller().getPlayer().getInventory().addItem(new ItemStack(Material.ENDER_PEARL));
             e.getKiller().getPlayer().getInventory().addItem(new ItemStack(Material.ARROW));
+            e.getKiller().getPlayer().setHealth(20);
         }
 
     }

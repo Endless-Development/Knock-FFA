@@ -112,7 +112,7 @@ public class ArenaManager {
         Arena arena = new Arena(arenas.size() + 1, maxPlayers);
         arenas.add(arena);
 
-        player.sendMessage(ChatUtils.colorMsg("&aArena created (ID: "+(arenas.size()+1)+")"));
+        player.sendMessage(ChatUtils.colorMsg("&aArena created (ID: "+arenas.size()+")"));
 
         return arena;
     }

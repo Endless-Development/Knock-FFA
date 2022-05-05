@@ -45,6 +45,11 @@ armor:
     material: IRON_HELMET
 
 
+kill-streaks:
+  - 3
+  - 10
+  - 20
+
 database-update-interval: 5 #minutes
 
 blocks-expire-time:
@@ -52,11 +57,14 @@ blocks-expire-time:
   warning: 3
   other: 15
 
+disable-chat-format: true
+
 messages:
   arena-chat-format: "&c&lKnockFFA &8| &f{username} &8: &7{message}"
   arena-join: "&b{username}&e joined the arena! (&b{min-players}&e/{max-players})"
   arena-left: "&9{username}&c left the arena! (&9{min-players}&c/{max-players})"
   killed-by-player: "&e{killed} was killed by {killer}."
   killed-by-void: "&e{killed} fell into the void."
+  kill-streak: "&c{username} &7has just reached a kill streak of &c{kills}&7 kills!"
 
 arenas:

@@ -50,6 +50,12 @@ public class Placeholders extends PlaceholderExpansion {
         if(params.equalsIgnoreCase("kffa_streak")) {
             return Integer.toString(plugin.getDbCache().getUser(player.getUniqueId().toString()).getStreak());
         }
+        if(params.equalsIgnoreCase("kffa_high_streak")) {
+            return Integer.toString(plugin.getDbCache().getUser(player.getUniqueId().toString()).getHighStreak());
+        }
+        if(params.equalsIgnoreCase("kffa_kdr")) {
+            return Double.toString(plugin.getDbCache().getUser(player.getUniqueId().toString()).getKdr());
+        }
 
         return null;
     }

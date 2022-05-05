@@ -34,7 +34,8 @@ public abstract class Database {
                 "username       VARCHAR(32) NOT NULL, " +
                 "kills          INT(12)     NOT NULL, " +
                 "deaths         INT(12)     NOT NULL, " +
-                "streak         INT(12)     NOT NULL " +
+                "streak         INT(12)     NOT NULL, " +
+                "high_streak    INT(12)     NOT NULL " +
                 ");";
 
         exeUpdate(dataQuery, "Created table named '" + dataTable + "'");
@@ -57,7 +58,8 @@ public abstract class Database {
                             resultSet.getString("username"),
                             resultSet.getInt("kills"),
                             resultSet.getInt("deaths"),
-                            resultSet.getInt("streak"));
+                            resultSet.getInt("streak"),
+                            resultSet.getInt("high_streak"));
                 } while (resultSet.next());
             }
 
@@ -76,10 +78,10 @@ public abstract class Database {
         try {
             Statement stmt = connection.createStatement();
 
-            stmt.executeUpdate("INSERT INTO playerData VALUES ('"+p.getUniqueId()+"', '"+p.getName()+"', '0', '0', '0');");
+            stmt.executeUpdate("INSERT INTO playerData VALUES ('"+p.getUniqueId()+"', '"+p.getName()+"', '0', '0', '0', '0');");
 
             stmt.close();
-            return new User(p.getUniqueId().toString(), p.getName(), 0, 0, 0);
+            return new User(p.getUniqueId().toString(), p.getName(), 0, 0, 0, 0);
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
@@ -95,7 +97,8 @@ public abstract class Database {
             stmt.executeUpdate("UPDATE playerData SET " +
                     "kills='"+user.getKills()+"', " +
                     "deaths='"+user.getDeaths()+"', " +
-                    "streak='"+user.getStreak()+"' " +
+                    "streak='"+user.getStreak()+"', " +
+                    "high_streak='"+user.getHighStreak()+"' " +
                     "WHERE uuid='"+user.getUUID()+"';");
 
             stmt.close();

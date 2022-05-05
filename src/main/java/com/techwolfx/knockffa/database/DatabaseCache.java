@@ -86,8 +86,7 @@ public class DatabaseCache {
      */
     public void addDeaths(Player player, int deaths) {
         User user = getUserOrCreate(player);
-        user.addDeaths(deaths);
-        user.setStreak(0);
+        user.addDeaths(deaths); // updates also streak
 
         users.put(player.getUniqueId().toString(), user);
     }
@@ -98,11 +97,12 @@ public class DatabaseCache {
      * @param player the player object
      * @param kills the kills to add to the player
      */
-    public void addKills(Player player, int kills) {
+    public User addKills(Player player, int kills) {
         User user = getUserOrCreate(player);
         user.addKills(kills); // updates also streak
 
         users.put(player.getUniqueId().toString(), user);
+        return user;
     }
 
     public void save() {

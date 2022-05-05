@@ -39,17 +39,29 @@ public class ConfigManager {
     public void reload() {
         inventoryItems.clear();
         Arrays.fill(armorItems, null);
+        streaks.clear();
 
         fetchData();
     }
 
     @Getter
     private final HashMap<Integer, ItemStack> inventoryItems = new HashMap<>();
+    @Getter
+    private List<Integer> streaks = new ArrayList<>();
 
     @Getter
     private final ItemStack[] armorItems = new ItemStack[4];
 
     private void fetchData() {
+        loadInventory();
+        loadStreaks();
+    }
+
+    private void loadStreaks() {
+        this.streaks = plugin.getConfig().getIntegerList("kill-streaks");
+    }
+
+    private void loadInventory() {
         Objects.requireNonNull(plugin.getConfig().getConfigurationSection("items"))
                 .getKeys(false).forEach(object -> {
                     String itemName = plugin.getConfig().getString("items."+object+".material").toUpperCase();
