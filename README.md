@@ -1,13 +1,13 @@
 # Knock-FFA
 
-Plugin custom per lo knock ffa, creato e sviluppato da [@MasterWolfX](https://github.com/MasterWolfx)
+Custom Knock-FFA plugin, developed by [@MasterWolfX](https://github.com/MasterWolfx)
 
 # Features
 
-- Blocchi infiniti che spariscono dopo 5 secondi
-- Inventario con spada,kb stick,blocchi,ender pearl,arco,freccia,ragnatela
-- La ragnatela è una e sparisce dopo 10 secondi
-- Si ottiene un altra ender pearl e un altra freccia quando si uccide un giocatore, e si rigenere tutta la vita
-- Stats, killstreak, ecc
-- Si possono creare varie arene
-- Tutto configurabile
+- Multi-arena
+- Stats and killstreak system
+- Everyone is customizable
+- Infinite blocks that disappear 5 seconds after being placed
+- Inventory with a sword, kb stick, blocks, ender pearls, cobwebs and a bow
+- Cobwebs disapper after 10 seconds
+- When killing a player, you get healed and are given another ender pearl and arrow
